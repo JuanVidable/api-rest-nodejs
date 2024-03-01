@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Empleados</title>
+</head>
+<body>
+    <h1>Listado de Empleados</h1>
+    <table id="empleados-table">
+        <!-- Aquí se mostrarán los empleados -->
+    </table>
+    <script>
+        // Hacer una solicitud para obtener la lista de empleados del servidor
+        fetch('/verempleados/')
+            .then(response => response.json())
+            .then(empleados => {
+                const table = document.getElementById('empleados-table');
+                // Iterar sobre la lista de empleados y agregar filas a la tabla
+                empleados.forEach(empleado => {
+                    const row = table.insertRow();
+                    row.insertCell().textContent = empleado.legajo;
+                    row.insertCell().textContent = empleado.nombre;
+                    row.insertCell().textContent = empleado.apellido;
+                    // ... (agrega más celdas según tus datos de empleado)
+                });
+            })
+            .catch(error => console.error(error));
+    </script>
+</body>
+</html>

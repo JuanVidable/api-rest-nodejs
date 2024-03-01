@@ -1,0 +1,90 @@
+<div style="border-bottom: 1px solid black;">
+    <form action="/insert" method="post">
+        INSERTAR EMPLEADO
+    
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+    
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required>
+    
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" required>
+    
+        <label for="sector">Sector:</label>
+        <input type="text" id="sector" name="sector" required>
+    
+        <label for="fechaIngreso">Fecha de Ingreso:</label>
+        <input type="text" id="fechaIngreso" name="fechaIngreso" required>
+    
+        <label for="activo">Activo:</label>
+        <input type="checkbox" id="activo" name="activo">
+    
+        <button type="submit">Agregar Empleado</button>
+    </form>
+</div>
+
+<div style="padding-top: 15px; padding-bottom: 15px; border-bottom: 1px solid black;">
+    <form action="/update/" method="POST">
+        MODIFICAR EMPLEADO
+    
+        <label for="legajo">Legajo:</label>
+        <input type="text" id="legajo" name="legajo" required>
+    
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" >
+    
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" >
+    
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" >
+    
+        <label for="sector">Sector:</label>
+        <input type="text" id="sector" name="sector" >
+    
+        <label for="fechaIngreso">Fecha de Ingreso:</label>
+        <input type="text" id="fechaIngreso" name="fechaIngreso" >
+    
+        <label for="activo">Activo:</label>
+        <input type="checkbox" id="activo" name="activo">
+    
+        <button type="submit" id="modificarBtn">Modificar Empleado</button>
+    
+    </form>
+</div>
+
+<div style=" padding-top: 15px; padding-bottom: 15px; border-bottom: 1px solid black;">
+    <form id="eliminarForm">
+    
+        <label for="legajoEliminar">Legajo a Eliminar:</label>
+        <input type="text" id="legajoEliminar" name="legajoEliminar" required>
+    
+        <button type="button" onclick="eliminarEmpleado()">Eliminar Empleado</button>
+    </form>
+</div>
+
+<div style="padding-top: 15px; padding-bottom: 15px;"><button onclick="verEmpleados()">Ver Todos los Empleados</button></div>
+
+<script>
+    
+    function eliminarEmpleado() {
+        var legajo = document.getElementById("legajoEliminar").value;
+        
+        fetch('/delete?legajo='+legajo, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); 
+        })
+        .catch(error => {
+            console.error(error); 
+        });
+    }
+    function verEmpleados() {
+        window.location.href = '/empleados'; 
+    }
+
+</script>
+
